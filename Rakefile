@@ -14,12 +14,12 @@ task default: :spec
 
 # rubocop:disable Metrics/BlockLength,Style/StderrPuts
 
-desc 'Test all Gemfiles from spec/*.gemfile'
+desc 'Test all Gemfiles from ./gemfiles/*.gemfile'
 task :test_all_gemfiles do
   require 'pty'
   require 'shellwords'
   cmd      = 'bundle install --quiet && bundle exec rake --trace'
-  statuses = Dir.glob('./spec/gemfiles/*{[!.lock]}').map do |gemfile|
+  statuses = Dir.glob('./gemfiles/*{[!.lock]}').map do |gemfile|
     Bundler.with_clean_env do
       env = { 'BUNDLE_GEMFILE' => gemfile }
       $stderr.puts "Testing #{File.basename(gemfile)}:
